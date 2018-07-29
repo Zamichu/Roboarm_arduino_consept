@@ -1,0 +1,217 @@
+#include <Servo.h>
+
+Servo kaanto;
+Servo varsi1;
+Servo varsi2;
+Servo varsi3;
+Servo koura;
+
+int pushButton = 7; //Start
+
+//Funktiot
+int kaantoliike(int[],int[]);
+int varsi1liike(int[],int[]);
+int varsi2liike(int[],int[]);
+int varsi3liike(int[],int[]);
+int kouraliike(int[],int[]);
+
+//Lähtö vakiot
+int kaantoarvo = 5;
+int varsi1arvo = 90;
+int varsi2arvo = 90;
+int varsi3arvo = 170;
+int kouraarvo = 90;
+
+int t = 30; //Liikenopeus säätö
+
+void setup() 
+{
+  Serial.begin(9600);
+  
+  kaanto.attach(2); 
+  varsi1.attach(3);
+  varsi2.attach(4);
+  varsi3.attach(5);
+  koura.attach(6);
+
+   pinMode(pushButton, INPUT);
+}
+
+
+void loop() 
+{
+  int buttonState = digitalRead(pushButton);
+  //Serial.println(buttonState);
+  
+  if(buttonState == 1)
+  {
+  kouraarvo = kouraliike(kouraarvo,40);
+  varsi1arvo = varsi1liike(varsi1arvo,90);
+  varsi2arvo = varsi2liike(varsi2arvo,110);
+  varsi3arvo = varsi3liike(varsi3arvo,155);
+  kaantoarvo = kaantoliike(kaantoarvo,85);
+  kouraarvo = kouraliike(kouraarvo,150);
+  varsi2arvo = varsi2liike(varsi2arvo,90);
+  varsi1arvo = varsi1liike(varsi1arvo,112); 
+  varsi3arvo = varsi3liike(varsi3arvo,144);
+  kouraarvo = kouraliike(kouraarvo,53);
+  varsi1arvo = varsi1liike(varsi1arvo,90);
+  kaantoarvo = kaantoliike(kaantoarvo,5);
+  varsi1arvo = varsi1liike(varsi1arvo,112);
+  kouraarvo = kouraliike(kouraarvo,140);
+  varsi1arvo = varsi1liike(varsi1arvo,90);
+  }
+  
+ 
+}
+
+int kaantoliike(int edarvo, int arvo)
+{
+   int retval;
+   if(edarvo <= arvo)
+   {
+   for(int value = edarvo; value <= arvo; value ++)
+  {
+    kaanto.write(value);
+    Serial.print("Kaanto ");
+    Serial.println(value); 
+    delay(t);
+    retval = value;
+  }
+  }
+
+  else
+  {
+     for(int value = edarvo; value >= arvo; value --)
+  {
+    kaanto.write(value);
+    Serial.print("Kaanto ");
+    Serial.println(value); 
+    delay(t);
+    retval = value;
+  }
+  }
+  return retval;
+}
+
+
+
+int varsi1liike(int edarvo, int arvo)
+{
+   int retval;
+   if(edarvo <= arvo)
+   {
+   for(int value = edarvo; value <= arvo; value ++)
+  {
+    varsi1.write(value);
+    Serial.print("Varsi1 ");
+    Serial.println(value);
+    delay(t);
+    retval = value;
+  }
+  }
+
+  else
+  {
+     for(int value = edarvo; value >= arvo; value --)
+  {
+    varsi1.write(value);
+    Serial.print("Varsi1 ");
+    Serial.println(value); 
+    delay(t);
+    retval = value;
+  }
+  }
+  return retval;
+}
+
+
+
+int varsi2liike(int edarvo, int arvo)
+{
+   int retval;
+   if(edarvo <= arvo)
+   {
+   for(int value = edarvo; value <= arvo; value ++)
+  {
+    varsi2.write(value);
+    Serial.print("Varsi1 ");
+    Serial.println(value);
+    delay(t);
+    retval = value;
+  }
+  }
+
+  else
+  {
+     for(int value = edarvo; value >= arvo; value --)
+  {
+    varsi2.write(value);
+    Serial.print("Varsi1 ");
+    Serial.println(value); 
+    delay(t);
+    retval = value;
+  }
+  }
+  return retval;
+}
+
+
+
+
+int varsi3liike(int edarvo, int arvo)
+{
+   int retval;
+   if(edarvo <= arvo)
+   {
+   for(int value = edarvo; value <= arvo; value ++)
+  {
+    varsi3.write(value);
+    Serial.print("Varsi1 ");
+    Serial.println(value);
+    delay(t);
+    retval = value;
+  }
+  }
+
+  else
+  {
+     for(int value = edarvo; value >= arvo; value --)
+  {
+    varsi3.write(value);
+    Serial.print("Varsi1 ");
+    Serial.println(value); 
+    delay(t);
+    retval = value;
+  }
+  }
+  return retval;
+}
+
+
+
+
+int kouraliike(int edarvo, int arvo)
+{
+   int retval;
+   if(edarvo <= arvo)
+   {
+   for(int value = edarvo; value <= arvo; value ++)
+  {
+    koura.write(value);
+    delay(t);
+    retval = value;
+  }
+  }
+
+  else
+  {
+     for(int value = edarvo; value >= arvo; value --)
+  {
+    koura.write(value);
+    delay(t);
+    retval = value;
+  }
+  }
+  return retval;
+}
